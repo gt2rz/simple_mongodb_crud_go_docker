@@ -1,0 +1,22 @@
+services:
+  app:
+    container_name: ${APP_NAME}
+    build: .
+    restart: always
+    ports:
+      - "${APP_PORT}:8080"
+    environment:
+      - MONGODB_URI=${MONGODB_URI}
+    volumes:
+      - .:/app
+      
+  db:
+    image: mongo
+    container_name: simple-mongo-crud-db
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INIT_ROOT_USERNAME=root
+      - MONGO_INIT_ROOT_PASSWORD=secret
+
